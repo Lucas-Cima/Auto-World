@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${jobs} and ${jobs.size()}">Currently No Jobs</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Date</th>
+        <th>Task</th>
+        <th>Notes</th>
+    </tr>
+
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.date}"></td>
+        <td th:text="${job.task}"></td>
+        <td th:text="${job.note}"></td>
+    </tr>
+
+</table>
+
+|<a href="/jobs/add">Add</a>|
+
+</body>
+</html>

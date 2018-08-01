@@ -18,7 +18,7 @@ public class Customer {
     private int id;
 
     @NotNull
-    @Size(min=10, max=30, message="Please Enter A Full Name")
+    @Size(min=10, max=30, message="Please Enter a Full Name")
     private String name;
 
     @NotNull
@@ -26,10 +26,11 @@ public class Customer {
     private String address;
 
     @NotNull
-    @Size(min=9, max=10, message="Please Enter A Phone Number")
+    @Size(min=9, max=10, message="Please Enter a Phone Number")
     private String phone;
 
     @Email
+    @Size(min=3, max=20, message = "Please Enter an E-mail")
     private String email;
 
     public Customer(String name, String address, String phone, String email) {
