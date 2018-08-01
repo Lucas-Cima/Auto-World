@@ -1,6 +1,8 @@
 package com.autoworld.autoworld.models;
 
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,15 +17,15 @@ public class Car {
     private int id;
 
     @NotNull
-    @Size(min=1, max=15)
+    @Size(min=1, max=15, message = "Please Enter a Make")
     private String make;
 
     @NotNull
-    @Size(min=1, max=20)
+    @Size(min=1, max=20, message = "Please Enter a Model")
     private String model;
 
     @NotNull
-    @Size(min=4, max=4)
+    @Range(min=1940, max=2018, message = "Please Enter a Year")
     private int year;
 
 

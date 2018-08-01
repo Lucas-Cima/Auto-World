@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${car}">
+    <div class="form-group">
+        <label th:for="make">Make</label>
+        <input class="form-control" th:field="*{make}" />
+        <span th:errors="*{make}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="model">Model</label>
+        <input class="form-control" th:field="*{model}" />
+        <span th:errors="*{model}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="year">Year</label>
+        <input class="form-control" th:field="*{year}" />
+        <span th:errors="*{year}" class="error"></span>
+    </div>
+    <input type="submit" value="Add Car" />
+</form>
+
+</body>
+</html>

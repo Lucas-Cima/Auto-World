@@ -15,7 +15,7 @@ public class Tech {
     private int id;
 
     @NotNull
-    @Size(min=3, max=25)
+    @Size(min=3, max=25 ,message = "Please Enter Full Name")
     private String name;
 
     public Tech(String name) {

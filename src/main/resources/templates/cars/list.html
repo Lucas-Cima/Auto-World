@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${cars} and ${cars.size()}">Currently No Cars</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+    </tr>
+
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.make}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.year}"></td>
+    </tr>
+
+</table>
+
+|<a href="/autoworld/cars/add">Add</a>|
+
+</body>
+</html>

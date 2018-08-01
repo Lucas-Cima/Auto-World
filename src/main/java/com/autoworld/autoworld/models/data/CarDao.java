@@ -1,6 +1,5 @@
 package com.autoworld.autoworld.models.data;
 
-
 import com.autoworld.autoworld.models.Car;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
