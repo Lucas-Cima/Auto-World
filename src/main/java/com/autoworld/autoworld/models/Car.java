@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -28,6 +30,10 @@ public class Car {
 
     @ManyToOne
     private Customer customer;
+
+    @OneToMany
+    @JoinColumn( name = "car_id")
+    private List<Job> jobs = new ArrayList<>();
 
     public Car(String make, String model, Integer year) {
         this.make = make;
@@ -54,4 +60,8 @@ public class Car {
     public Customer getCustomer() { return customer; }
 
     public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public List<Job> getJobs() { return jobs; }
+
+    public void setJobs(List<Job> jobs) { this.jobs = jobs; }
 }

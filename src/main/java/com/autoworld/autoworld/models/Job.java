@@ -4,6 +4,7 @@ package com.autoworld.autoworld.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,15 +16,21 @@ public class Job {
     private int id;
 
     @NotNull
-    @Size(min=6, max=6, message="Please Enter A Date")
+    @Size(min=8, max=8, message="Please Enter A Date")
     private String date;
 
     @NotNull
-    @Size(min=3, max=20, message = "Enter a Task")
+    @Size(min=3, max=50, message = "Enter a Task")
     private String task;
 
-    @Size(min=3, max=50)
+    @Size(min=3, max=80)
     private String note;
+
+    @ManyToOne
+    private Tech tech;
+
+    @ManyToOne
+    private Car car;
 
     public Job(String date, String task, String note) {
         this.date = date;
@@ -46,4 +53,12 @@ public class Job {
     public String getNote() { return note; }
 
     public void setNote(String note) { this.note = note; }
+
+    public Tech getTech() { return tech; }
+
+    public void setTech(Tech tech) { this.tech = tech; }
+
+    public Car getCar() { return car; }
+
+    public void setCar(Car car) { this.car = car; }
 }
