@@ -4,11 +4,12 @@ package com.autoworld.autoworld.models;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 public class Customer {
@@ -32,6 +33,11 @@ public class Customer {
     @Email
     @Size(min=3, max=20, message = "Please Enter an E-mail")
     private String email;
+
+    @OneToMany
+    @JoinColumn( name = "customer_id")
+    private List<Car> cars = new ArrayList<>();
+
 
     public Customer(String name, String address, String phone, String email) {
         this.name = name;
@@ -59,4 +65,8 @@ public class Customer {
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
+
+    public List<Car> getCars() { return cars; }
+
+    public void setCars(List<Car> cars) { this.cars = cars; }
 }

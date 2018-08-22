@@ -3,9 +3,7 @@ package com.autoworld.autoworld.models;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,6 +26,8 @@ public class Car {
     @Range(min=1940, max=2018, message = "Please Enter a Year")
     private int year;
 
+    @ManyToOne
+    private Customer customer;
 
     public Car(String make, String model, Integer year) {
         this.make = make;
@@ -51,4 +51,7 @@ public class Car {
 
     public void setYear(int year) { this.year = year; }
 
+    public Customer getCustomer() { return customer; }
+
+    public void setCustomer(Customer customer) { this.customer = customer; }
 }

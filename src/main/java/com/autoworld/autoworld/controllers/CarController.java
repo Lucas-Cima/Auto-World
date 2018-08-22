@@ -2,7 +2,9 @@ package com.autoworld.autoworld.controllers;
 
 
 import com.autoworld.autoworld.models.Car;
+import com.autoworld.autoworld.models.Customer;
 import com.autoworld.autoworld.models.data.CarDao;
+import com.autoworld.autoworld.models.data.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -19,6 +22,9 @@ public class CarController {
 
     @Autowired
     private CarDao carDao;
+
+    @Autowired
+    private CustomerDao customerDao;
 
 
 
@@ -35,16 +41,20 @@ public class CarController {
     public String addCarForm(Model model) {
         model.addAttribute("title", "Add a New Car");
         model.addAttribute(new Car());
+        model.addAttribute("customers", customerDao.findAll());
         return "cars/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCarForm(@ModelAttribute @Valid Car newCar,
-                                    Errors errors, Model model) {
+                                    Errors errors, Model model, @RequestParam int customerId) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a New Car");
+            model.addAttribute("title", customerDao.findAll());
             return "cars/add";
         }
+        Customer cus = customerDao.findOne(customerId);
+        newCar.setCustomer(cus);
         carDao.save(newCar);
         return "redirect:";
     }
