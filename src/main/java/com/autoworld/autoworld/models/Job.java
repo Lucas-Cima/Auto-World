@@ -16,13 +16,14 @@ public class Job {
     private int id;
 
     @NotNull
-    @Size(min=8, max=8, message="Please Enter A Date")
+    @Size(min=8, message="Please Enter A Date")
     private String date;
 
     @NotNull
     @Size(min=3, max=50, message = "Enter a Task")
     private String task;
 
+    @NotNull
     @Size(min=3, max=80)
     private String note;
 
@@ -61,4 +62,5 @@ public class Job {
     public Car getCar() { return car; }
 
     public void setCar(Car car) { this.car = car; }
+
 }

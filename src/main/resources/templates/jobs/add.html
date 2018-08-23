@@ -8,6 +8,14 @@
 
 <form method="post" style="max-width:600px;" th:object="${job}">
     <div class="form-group">
+        <label th:for="type">Car</label>
+        <select th:name="carId">
+            <option th:each="car : ${cars}"
+                    th:text="${car.year} + ' ' + ${car.make} + ' ' + ${car.model}"
+                    th:value="${car.id}"></option>
+        </select>
+    </div>
+    <div class="form-group">
         <label th:for="date">Date</label>
         <input class="form-control" th:field="*{date}" />
         <span th:errors="*{date}" class="error"></span>
@@ -21,6 +29,14 @@
         <label th:for="note">Notes</label>
         <input class="form-control" th:field="*{note}" />
         <span th:errors="*{note}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="type">Technician</label>
+        <select th:name="techId">
+            <option th:each="tech : ${techs}"
+                    th:text="${tech.name}"
+                    th:value="${tech.id}"></option>
+        </select>
     </div>
     <input type="submit" value="Add Job" />
 </form>
