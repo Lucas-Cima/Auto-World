@@ -22,11 +22,11 @@
     </tr>
 
     <tr th:each="job : ${jobs}">
-        <td th:text="${job.car.year} + ' ' + ${job.car.make} + ' ' + ${job.car.model}"></td>
+        <td th:text="${car.year} + ' ' + ${car.make} + ' ' + ${car.model}"></td>
         <td th:text="${job.date}"></td>
         <td th:text="${job.task}"></td>
         <td th:text="${job.note}"></td>
-        <td th:text="${job.tech.name}"></td>
+        <td th:text="${tech.name}"></td>
     </tr>
 
 </table>

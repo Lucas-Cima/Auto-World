@@ -4,6 +4,7 @@ import com.autoworld.autoworld.models.Car;
 import com.autoworld.autoworld.models.Job;
 import com.autoworld.autoworld.models.Tech;
 import com.autoworld.autoworld.models.data.CarDao;
+import com.autoworld.autoworld.models.data.CustomerDao;
 import com.autoworld.autoworld.models.data.JobDao;
 import com.autoworld.autoworld.models.data.TechDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,12 @@ public class JobController {
             model.addAttribute("techs", techDao.findAll());
             return "jobs/add";
         }
+
         Tech t = techDao.findOne(techId);
+        newJob.setTech(t);
         Car c = carDao.findOne(carId);
         newJob.setCar(c);
-        newJob.setTech(t);
+
         jobDao.save(newJob);
         return "redirect:";
     }

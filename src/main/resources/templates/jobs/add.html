@@ -10,6 +10,7 @@
     <div class="form-group">
         <label th:for="type">Car</label>
         <select th:name="carId">
+            <option>Select Car</option>
             <option th:each="car : ${cars}"
                     th:text="${car.year} + ' ' + ${car.make} + ' ' + ${car.model}"
                     th:value="${car.id}"></option>
@@ -33,6 +34,7 @@
     <div class="form-group">
         <label th:for="type">Technician</label>
         <select th:name="techId">
+            <option>Select Technician</option>
             <option th:each="tech : ${techs}"
                     th:text="${tech.name}"
                     th:value="${tech.id}"></option>
