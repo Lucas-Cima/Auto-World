@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post">
+
+    <div th:each="customer : ${customers}" class="checkbox">
+        <input type="checkbox" name="customerIds" th:value="${customer.id}" th:id="${customer.id}"/>
+        <label th:for="${customer.id}" th:text="${customer.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Delete Customer" />
+</form>
+
+</body>
+</html>
