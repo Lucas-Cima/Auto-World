@@ -3,18 +3,12 @@ package com.autoworld.autoworld.controllers;
 import com.autoworld.autoworld.models.Car;
 import com.autoworld.autoworld.models.Job;
 import com.autoworld.autoworld.models.Tech;
-import com.autoworld.autoworld.models.data.CarDao;
-import com.autoworld.autoworld.models.data.CustomerDao;
-import com.autoworld.autoworld.models.data.JobDao;
-import com.autoworld.autoworld.models.data.TechDao;
+import com.autoworld.autoworld.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -32,8 +26,12 @@ public class JobController {
     @Autowired
     private TechDao techDao;
 
+    @Autowired
+    private UserDao userDao;
+
     @RequestMapping(value = "")
-    public String displayJobs(Model model) {
+    public String displayJobs(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+        if(username.equals("none")) { return "redirect:/user/login"; }
         model.addAttribute("jobs", jobDao.findAll());
         model.addAttribute("title", " List of Jobs");
 
@@ -41,7 +39,8 @@ public class JobController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String addJobForm(Model model) {
+    public String addJobForm(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+        if(username.equals("none")) { return "redirect:/user/login"; }
         model.addAttribute("title", "Add a New Job");
         model.addAttribute(new Job());
         model.addAttribute("cars", carDao.findAll());
@@ -51,7 +50,10 @@ public class JobController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddJobForm(@ModelAttribute @Valid Job newJob, Errors errors,
-                                    Model model, @RequestParam int carId, @RequestParam int techId) {
+                                    Model model, @RequestParam int carId, @RequestParam int techId,
+                                    @CookieValue(value = "user", defaultValue = "none") String username) {
+        if(username.equals("none")) { return "redirect:/user/login"; }
+
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a New Job");
             model.addAttribute("cars", carDao.findAll());
@@ -69,13 +71,17 @@ public class JobController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public String displayDeleteJobForm(Model model) {
+    public String displayDeleteJobForm(Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
+        if(username.equals("none")) { return "redirect:/user/login"; }
         model.addAttribute("jobs", jobDao.findAll());
         model.addAttribute("title", "Delete Job(s)");
         return "jobs/delete";
     }
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String processDeleteJobForm(@RequestParam int[] jobIds) {
+    public String processDeleteJobForm(@RequestParam int[] jobIds,
+                                       @CookieValue(value = "user", defaultValue = "none") String username) {
+
+        if(username.equals("none")) { return "redirect:/user/login"; }
 
         for (int jobId : jobIds) {
             jobDao.delete(jobId);
