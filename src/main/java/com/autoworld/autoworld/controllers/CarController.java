@@ -58,4 +58,20 @@ public class CarController {
         carDao.save(newCar);
         return "redirect:";
     }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteCarForm(Model model) {
+        model.addAttribute("cars", carDao.findAll());
+        model.addAttribute("title", "Delete Car(s)");
+        return "cars/delete";
+    }
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteCarForm(@RequestParam int[] carIds) {
+
+        for (int carId : carIds) {
+            carDao.delete(carId);
+        }
+
+        return "redirect:";
+    }
 }
