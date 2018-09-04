@@ -11,7 +11,7 @@
 <p th:unless="${jobs} and ${jobs.size()}">Currently No Jobs</p>
 
 
-<table class="table">
+<table class="table table-bordered" >
 
     <tr>
         <th>Car</th>
@@ -30,9 +30,8 @@
     </tr>
 
 </table>
-
-|<a href="/jobs/add">Add</a>|
-<a href="/jobs/delete">Delete</a>|
+<a href="/jobs/add" class="btn btn-primary">Add</a>
+<a href="/jobs/delete" class="btn btn-danger">Delete</a>
 
 </body>
 </html>

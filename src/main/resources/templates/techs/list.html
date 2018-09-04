@@ -11,7 +11,7 @@
 <p th:unless="${techs} and ${techs.size()}">Currently No Technicians</p>
 
 
-<table class="table">
+<table class="table table-bordered">
 
     <tr>
         <th>Name</th>
@@ -23,8 +23,8 @@
 
 </table>
 
-|<a href="/techs/add">Add</a>|
-<a href="/techs/delete">Delete</a>|
+<a href="/techs/add" class="btn btn-primary">Add</a>
+<a href="/techs/delete" class="btn btn-danger">Delete</a>
 
 </body>
 </html>

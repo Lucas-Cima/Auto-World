@@ -11,7 +11,7 @@
 <p th:unless="${customers} and ${customers.size()}">Currently No Customers</p>
 
 
-<table class="table">
+<table class="table table-bordered">
 
     <tr>
         <th>Name</th>
@@ -29,8 +29,8 @@
 
 </table>
 
-|<a href="/customers/add">Add</a>|
-<a href="/customers/delete">Delete</a>|
+<a href="/customers/add" class="btn btn-primary">Add</a>
+<a href="/customers/delete" class="btn btn-danger">Delete</a>
 
 </body>
 </html>
