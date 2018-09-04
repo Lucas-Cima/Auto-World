@@ -12,15 +12,12 @@
 
 
 <table class="table table-bordered">
-
     <tr>
         <th>Name</th>
     </tr>
-
     <tr th:each="tech : ${techs}">
         <td th:text="${tech.name}"></td>
     </tr>
-
 </table>
 
 <a href="/techs/add" class="btn btn-primary">Add</a>
