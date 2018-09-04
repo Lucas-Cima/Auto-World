@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -47,5 +48,19 @@ public class CustomerController {
         customerDao.save(newCustomer);
         return "redirect:";
     }
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteCustomerForm(Model model) {
+        model.addAttribute("customers", customerDao.findAll());
+        model.addAttribute("title", "Delete Customer(s)");
+        return "customers/delete";
+    }
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteCustomerForm(@RequestParam int[] customerIds) {
 
+        for (int customerId : customerIds) {
+            customerDao.delete(customerId);
+        }
+
+        return "redirect:";
+    }
 }

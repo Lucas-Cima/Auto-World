@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -45,6 +46,22 @@ public class TechController {
             return "techs/add";
         }
         techDao.save(newTech);
+        return "redirect:";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteTechForm(Model model) {
+        model.addAttribute("techs", techDao.findAll());
+        model.addAttribute("title", "Delete Tech(s)");
+        return "techs/delete";
+    }
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteTechForm(@RequestParam int[] techIds) {
+
+        for (int techId : techIds) {
+            techDao.delete(techId);
+        }
+
         return "redirect:";
     }
 }

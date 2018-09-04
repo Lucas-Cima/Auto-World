@@ -68,4 +68,20 @@ public class JobController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteJobForm(Model model) {
+        model.addAttribute("jobs", jobDao.findAll());
+        model.addAttribute("title", "Delete Job(s)");
+        return "jobs/delete";
+    }
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteJobForm(@RequestParam int[] jobIds) {
+
+        for (int jobId : jobIds) {
+            jobDao.delete(jobId);
+        }
+
+        return "redirect:";
+    }
+
 }
