@@ -16,7 +16,7 @@
         <th>Name</th>
     </tr>
     <tr th:each="tech : ${techs}">
-        <td th:text="${tech.name}"></td>
+        <td><a href="/technician?tech={{tech.name}}" th:text="${tech.name}"></a></td>
     </tr>
 </table>
 
